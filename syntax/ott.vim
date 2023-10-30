@@ -8,11 +8,22 @@ endif
 
 syn case match
 
+silent! syn include @tex syntax/tex.vim
+silent! syn include @coq syntax/coq.vim
+silent! syn include @isa syntax/isa.vim
+silent! syn include @hol syntax/hol.vim
+silent! syn include @ocaml syntax/ocaml.vim
+
 syn match   ottPuncuation           "::=\|::\|<::\|---\+\|\.\.\| | \|</\|/>\|//"
 syn match   ottComment              "%.*$"
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
 syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
-syn match   ottKeywordInMorphism    contained "\<tex\>\|\<isa\>\|\<coq\>\|\<hol\>\|\<ocaml\>\|\<com\>\|\<coq-equality\>\|\<repr-locally-nameless\>\|\<phantom\>\|\<lex\>\|\<texvar\>\|\<isavar\>\|\<holvar\>\|\<ocamlvar\>\|\<coq-equality\>\|\<ich\>\|\<ic\>\|\<ch\>\|\<ih\>\|\<isasyn\>\|\<isaprec\>\|\<isaprec\>"
+syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
+syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=ottVarInMorphism,@texMathZoneGroup
+syn region  ottCoqMorphism          matchgroup=ottMorphism start="{{ *coq" end="}}" contains=ottVarInMorphism,@coq
+syn region  ottIsaMorphism          matchgroup=ottMorphism start="{{ *isa" end="}}" contains=ottVarInMorphism,@isa
+syn region  ottHolMorphism          matchgroup=ottMorphism start="{{ *hol" end="}}" contains=ottVarInMorphism,@hol
+syn region  ottOcamlMorphism        matchgroup=ottMorphism start="{{ *ocaml" end="}}" contains=ottVarInMorphism,@ocaml
 
 syn keyword ottKeyword              embed homs metavar indexvar grammar subrules
 syn keyword ottKeyword              contextrules substitutions single multiple

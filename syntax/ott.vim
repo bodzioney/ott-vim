@@ -14,12 +14,15 @@ silent! syn include @isa syntax/isa.vim
 silent! syn include @hol syntax/hol.vim
 silent! syn include @ocaml syntax/ocaml.vim
 
+syntax cluster texMathMatchGroup add=ottVarInMorphism
+syntax cluster texClusterMath add=ottVarInMorphism
+
 syn match   ottPuncuation           "::=\|::\|<::\|---\+\|\.\.\| | \|</\|/>\|//"
 syn match   ottComment              "%.*$"
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
 syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
-syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=ottVarInMorphism,@texMathZoneGroup,@texClusterMath
+syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=@texMathMatchGroup,@texClusterMath
 syn region  ottCoqMorphism          matchgroup=ottMorphism start="{{ *coq" end="}}" contains=ottVarInMorphism,@coq
 syn region  ottIsaMorphism          matchgroup=ottMorphism start="{{ *isa" end="}}" contains=ottVarInMorphism,@isa
 syn region  ottHolMorphism          matchgroup=ottMorphism start="{{ *hol" end="}}" contains=ottVarInMorphism,@hol

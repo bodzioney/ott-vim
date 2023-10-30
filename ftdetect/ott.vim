@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.ott set filetype=ott
+au BufRead,BufNewFile *.ott setf ott

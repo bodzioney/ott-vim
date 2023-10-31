@@ -17,11 +17,12 @@ silent! syn include @ocaml syntax/ocaml.vim
 syntax cluster texMathMatchGroup add=ottVarInMorphism
 syntax cluster texClusterMath add=ottVarInMorphism
 
-syn match   ottPuncuation           "::=\|::\|<::\|_::\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
+syn match   ottPuncuation           ",\|::=\|::\|<::\|_::\|<="
 syn match   ottComment              "%.*$"
-syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze::" nextgroup=ottProduction2
-syn region  ottProductionCategories contained matchgroup=ottPuncuation start="::" end="::" nextgroup=ottProductionName skipwhite skipempty
-syn match   ottProductionName       contained "\k\+"
+syn match   ottPuncuation           "|" nextgroup=ottElements
+syn region  ottElements             contained start="" end="\ze::" contains=ottElementsPuncuation
+syn match   ottElementsPuncuation   contained "\.\.\.\.\|\.\.\.\|\.\.\|</\|//\|/>"
+syn keyword ottElementsKeyword      contained IN
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism,ottKeywordInMorphism
 syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
@@ -35,13 +36,16 @@ syn region   ottRules               matchgroup=ottKeyword start="\<by\>" end="\z
 syn region   ottCommentLine         contained start="^\s*\zs%" end="$"
 syn region   ottLineLine            contained matchgroup=ottPuncuation start="^\s*\zs-----*" end="$"
 
+syn keyword ottKeyword              defn fun nextgroup=ottElements skipwhite skipempty
+
 syn keyword ottKeyword              embed homs metavar indexvar grammar subrules
 syn keyword ottKeyword              contextrules substitutions single multiple
-syn keyword ottKeyword              freevars defns defn funs right left parsing
-syn keyword ottKeyword              names distinctnames union IN
-syn keyword ottKeyword              fun bind in non
+syn keyword ottKeyword              freevars parsing begincoqsection endcoqsection coqvariable
+syn keyword ottKeyword              left right non defns funs
 
 hi def link ottPuncuation            Structure
+hi def link ottElementsPuncuation    Structure
+hi def link ottElementsKeyword       Keyword
 hi def link ottComment               Comment
 hi def link ottCommentLine           Comment
 hi def link ottMorphism              Macro

@@ -17,10 +17,12 @@ silent! syn include @ocaml syntax/ocaml.vim
 syntax cluster texMathMatchGroup add=ottVarInMorphism
 syntax cluster texClusterMath add=ottVarInMorphism
 
-syn match   ottPuncuation           "::=\|::\|<::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\| | \|</\|/>\|//"
+syn match   ottPuncuation           "::=\|::\|<::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
 syn match   ottComment              "%.*$"
+syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze::" nextgroup=ottProduction2
+syn region  ottProduction2          contained matchgroup=ottPuncuation start="::" end="::" 
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
-syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
+syn region  ottVarInMorphism        contained start="\[\[" end="\]\]" transparent contains=TOP
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
 syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=@texMathMatchGroup,@texClusterMath
 syn region  ottCoqMorphism          matchgroup=ottMorphism start="{{ *coq" end="}}" contains=ottVarInMorphism,@coq
@@ -38,7 +40,6 @@ syn keyword ottKeyword              names distinctnames union by IN
 hi def link ottPuncuation            Structure
 hi def link ottComment               Comment
 hi def link ottMorphism              Macro
-hi def link ottVarInMorphism         Identifier
 hi def link ottKeywordInMorphism     Keyword
 
 hi def link ottRule                  Normal

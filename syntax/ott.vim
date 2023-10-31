@@ -17,12 +17,12 @@ silent! syn include @ocaml syntax/ocaml.vim
 syntax cluster texMathMatchGroup add=ottVarInMorphism
 syntax cluster texClusterMath add=ottVarInMorphism
 
-syn match   ottPuncuation           "::=\|::\|<::\|_::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
+syn match   ottPuncuation           "::=\|::\|<::\|_::\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
 syn match   ottComment              "%.*$"
 syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze::" nextgroup=ottProduction2
 syn region  ottProductionCategories contained matchgroup=ottPuncuation start="::" end="::" nextgroup=ottProductionName skipwhite skipempty
 syn match   ottProductionName       contained "\k\+"
-syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
+syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism,ottKeywordInMorphism
 syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
 syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=@texMathMatchGroup,@texClusterMath
@@ -31,15 +31,19 @@ syn region  ottIsaMorphism          matchgroup=ottMorphism start="{{ *isa" end="
 syn region  ottHolMorphism          matchgroup=ottMorphism start="{{ *hol" end="}}" contains=ottVarInMorphism,@hol
 syn region  ottOcamlMorphism        matchgroup=ottMorphism start="{{ *ocaml" end="}}" contains=ottVarInMorphism,@ocaml
 
+syn region   ottRules               matchgroup=ottKeyword start="\<by\>" end="\ze\<\(grammar\|embed\|homs\|metavar\|indexvar\|subrules\|contextrules\|substitutions\|freevars\|parsing\|defns\|begincoqsection\|endcoqsection\|coqvariable\|defn\|funs\|fun\)\>" end="\%$" contains=ottMorphism,ottLineLine,ottCommentLine
+syn region   ottCommentLine         contained start="^\s*\zs%" end="$"
+syn region   ottLineLine            contained matchgroup=ottPuncuation start="^\s*\zs-----*" end="$"
+
 syn keyword ottKeyword              embed homs metavar indexvar grammar subrules
 syn keyword ottKeyword              contextrules substitutions single multiple
 syn keyword ottKeyword              freevars defns defn funs right left parsing
-syn keyword ottKeyword              names distinctnames union by IN
-" These keywords are more common; seems like it's more prudent to not highlight them
-" syn keyword ottKeyword              fun bind in non
+syn keyword ottKeyword              names distinctnames union IN
+syn keyword ottKeyword              fun bind in non
 
 hi def link ottPuncuation            Structure
 hi def link ottComment               Comment
+hi def link ottCommentLine           Comment
 hi def link ottMorphism              Macro
 hi def link ottKeywordInMorphism     Keyword
 

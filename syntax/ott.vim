@@ -20,7 +20,8 @@ syntax cluster texClusterMath add=ottVarInMorphism
 syn match   ottPuncuation           "::=\|::\|<::\|_::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
 syn match   ottComment              "%.*$"
 syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze::" nextgroup=ottProduction2
-syn region  ottProduction2          contained matchgroup=ottPuncuation start="::" end="::" 
+syn region  ottProductionCategories contained matchgroup=ottPuncuation start="::" end="::" nextgroup=ottProductionName skipwhite skipempty
+syn match   ottProductionName       contained "\k\+"
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
 syn region  ottVarInMorphism        contained start="\[\[" end="\]\]" transparent contains=TOP
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com

@@ -17,7 +17,7 @@ silent! syn include @ocaml syntax/ocaml.vim
 syntax cluster texMathMatchGroup add=ottVarInMorphism
 syntax cluster texClusterMath add=ottVarInMorphism
 
-syn match   ottPuncuation           "::=\|::\|<::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
+syn match   ottPuncuation           "::=\|::\|<::\|_::\|---\+\|\.\.\.\.\|\.\.\.\|\.\.\|</\|/>\|//"
 syn match   ottComment              "%.*$"
 syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze::" nextgroup=ottProduction2
 syn region  ottProduction2          contained matchgroup=ottPuncuation start="::" end="::" 

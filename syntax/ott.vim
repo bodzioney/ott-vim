@@ -23,7 +23,7 @@ syn region  ottProduction           matchgroup=ottPuncuation start="|" end="\ze:
 syn region  ottProductionCategories contained matchgroup=ottPuncuation start="::" end="::" nextgroup=ottProductionName skipwhite skipempty
 syn match   ottProductionName       contained "\k\+"
 syn region  ottMorphism             start="{{" end="}}" contains=ottVarInMorphism, ottKeywordInMorphism
-syn region  ottVarInMorphism        contained start="\[\[" end="\]\]" transparent contains=TOP
+syn region  ottVarInMorphism        contained start="\[\[" end="\]\]"
 syn keyword ottKeywordInMorphism    contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com
 syn region  ottTexMorphism          matchgroup=ottMorphism start="{{ *\(tex\|tex-preamble\|tex-wrap-pre\|tex-wrap-post\)" end="}}" contains=@texMathMatchGroup,@texClusterMath
 syn region  ottCoqMorphism          matchgroup=ottMorphism start="{{ *coq" end="}}" contains=ottVarInMorphism,@coq

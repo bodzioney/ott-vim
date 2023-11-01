@@ -6,16 +6,26 @@ if exists("b:current_syntax")
     finish
 endif
 
-syn case match
+let s:save_iskeyword = &l:iskeyword
 
-silent! syn include @tex syntax/tex.vim
-silent! syn include @coq syntax/coq.vim
-silent! syn include @isa syntax/isa.vim
-silent! syn include @hol syntax/hol.vim
-silent! syn include @ocaml syntax/ocaml.vim
-
+silent! syn include @tex syntax/tex.vim | silent! unlet b:current_syntax
 syn cluster texMathMatchGroup add=ottHomInner
 syn cluster texClusterMath    add=ottHomInner
+
+silent! syn include @coq syntax/coq.vim | silent! unlet b:current_syntax
+syn cluster coqTerm           add=ottHomInner
+syn clear   coqError
+
+silent! syn include @isa syntax/isa.vim | silent! unlet b:current_syntax
+silent! syn include @hol syntax/hol.vim | silent! unlet b:current_syntax
+silent! syn include @ocaml syntax/ocaml.vim | silent! unlet b:current_syntax
+
+let &l:iskeyword = s:save_iskeyword
+unlet s:save_iskeyword
+syn iskeyword clear
+
+
+syn case match
 
 syn match   ottPunctuation ",\|::=\|::\|<::\|_::\|<="
 syn match   ottPunctuation "|" nextgroup=ottElements
@@ -36,7 +46,7 @@ syn keyword ottHomName  contained ocaml nextgroup=ottOcamlHom skipwhite skipempt
 syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof
 syn match   ottComHom   contained "\_.*" contains=@tex
 syn match   ottTexHom   contained "\_.*" contains=@texMathMatchGroup,@texClusterMath
-syn match   ottCoqHom   contained "\_.*" contains=ottHomInner,@coq
+syn match   ottCoqHom   contained "\_.*" contains=@coq,@coqTerm
 syn match   ottIsaHom   contained "\_.*" contains=ottHomInner,@isa
 syn match   ottHolHom   contained "\_.*" contains=ottHomInner,@hol
 syn match   ottOcamlHom contained "\_.*" contains=ottHomInner,@ocaml

@@ -25,19 +25,20 @@ syn region  ottComment start=">>" end="<<" contains=ottComment
 
 syn region  ottElements contained start="" end="\ze::" contains=ottDots,ottComp
 
-syn region  ottHom      matchgroup=ottHomDelim start="{{" end="}}" contains=ottHomName,ottHomInner
+syn region  ottHom      matchgroup=ottHomDelim start="{{" end="}}" keepend contains=ottHomName,ottHomInner
+syn region  ottHom      matchgroup=ottHomDelim start="{{\*" end="\*}}" keepend contains=ottHomName,ottHomInner
 syn keyword ottHomName  contained tex tex-preamble tex-wrap-pre tex-wrap-post nextgroup=ottTexHom skipwhite skipempty
 syn keyword ottHomName  contained coq nextgroup=ottCoqHom skipwhite skipempty
 syn keyword ottHomName  contained isa nextgroup=ottIsaHom skipwhite skipempty
 syn keyword ottHomName  contained hol nextgroup=ottHolHom skipwhite skipempty
 syn keyword ottHomName  contained ocaml nextgroup=ottOcamlHom skipwhite skipempty
 syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com skipwhite skipempty
-syn region  ottTexHom   contained start="" end="\ze}}" keepend contains=@texMathMatchGroup,@texClusterMath
-syn region  ottCoqHom   contained start="" end="\ze}}" keepend contains=ottHomInner,@coq
-syn region  ottIsaHom   contained start="" end="\ze}}" keepend contains=ottHomInner,@isa
-syn region  ottHolHom   contained start="" end="\ze}}" keepend contains=ottHomInner,@hol
-syn region  ottOcamlHom contained start="" end="\ze}}" keepend contains=ottHomInner,@ocaml
-syn region  ottHomInner contained matchgroup=ottHomInnerDelim start="\[\[" end="\]\]" contains=ottComp,ottDots
+syn match   ottTexHom   contained ".*" contains=@texMathMatchGroup,@texClusterMath
+syn match   ottCoqHom   contained ".*" contains=ottHomInner,@coq
+syn match   ottIsaHom   contained ".*" contains=ottHomInner,@isa
+syn match   ottHolHom   contained ".*" contains=ottHomInner,@hol
+syn match   ottOcamlHom contained ".*" contains=ottHomInner,@ocaml
+syn region  ottHomInner contained matchgroup=ottHomInnerDelim start="\[\[" end="\]\]" extend contains=ottComp,ottDots
 
 syn region  ottBindspec            matchgroup=ottBindspecDelim start="(+" end="+)" contains=ottComment,ottDots,ottComp,ottBindspecKeyword,ottBindspecPunctuation
 syn keyword ottBindspecKeyword     contained bind in names distinctnames union

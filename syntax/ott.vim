@@ -47,15 +47,16 @@ syn keyword ottBindspecKeyword     contained bind in names distinctnames union
 syn match   ottBindspecPunctuation contained "=\|#\|(\|)\|{}"
 
 syn match   ottDots      contained "\.\.\.\.\|\.\.\.\|\.\."
-syn region  ottComp      contained matchgroup=ottCompDelim start="</" end="/>" keepend contains=ottDots,ottCompDelim
+syn region  ottComp      contained matchgroup=ottCompDelim start="</" end="/>" contains=ottDots,ottCompDelim
 syn match   ottCompDelim contained "//"
 syn keyword ottCompDelim contained "IN"
 
-syn region  ottRules       matchgroup=ottKeyword start="\<by\>" end="\ze\<\(grammar\|embed\|homs\|metavar\|indexvar\|subrules\|contextrules\|substitutions\|freevars\|parsing\|defns\|begincoqsection\|endcoqsection\|coqvariable\|defn\|funs\|fun\)\>" end="\%$" contains=ottHom,ottLineLine,ottCommentLine
+syn region  ottRules       contained start="" end="\ze\<\(grammar\|embed\|homs\|metavar\|indexvar\|subrules\|contextrules\|substitutions\|freevars\|parsing\|defns\|begincoqsection\|endcoqsection\|coqvariable\|defn\|funs\|fun\)\>" contains=ottHom,ottLineLine,ottCommentLine
 syn region  ottCommentLine contained start="^\s*\zs%" end="$"
 syn region  ottLineLine    contained matchgroup=ottPunctuation start="^\s*\zs-----*" end="$"
 
 syn keyword ottKeyword defn fun nextgroup=ottElements skipwhite skipempty
+syn keyword ottKeyword by nextgroup=ottRules skipwhite skipempty
 syn keyword ottKeyword embed homs metavar indexvar grammar subrules
 syn keyword ottKeyword contextrules substitutions single multiple
 syn keyword ottKeyword freevars parsing begincoqsection endcoqsection coqvariable

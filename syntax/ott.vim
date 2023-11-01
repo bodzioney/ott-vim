@@ -72,7 +72,7 @@ hi def link ottHomDelim      Macro
 hi def link ottHomInnerDelim Macro
 
 hi def link ottKeyword         Keyword
-hi def link ottHomKeyword      ottKeyword
+hi def link ottHomName         ottKeyword
 hi def link ottBindspecKeyword ottKeyword
 
 hi def link ottElements Normal

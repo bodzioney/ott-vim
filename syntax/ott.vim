@@ -27,12 +27,14 @@ syn region  ottElements contained start="" end="\ze::" contains=ottDots,ottComp
 
 syn region  ottHom      matchgroup=ottHomDelim start="{{" end="}}" keepend contains=ottHomName,ottHomInner
 syn region  ottHom      matchgroup=ottHomDelim start="{{\*" end="\*}}" keepend contains=ottHomName,ottHomInner
+syn keyword ottHomName  contained com nextgroup=ottComHom skipwhite skipempty
 syn keyword ottHomName  contained tex tex-preamble tex-wrap-pre tex-wrap-post nextgroup=ottTexHom skipwhite skipempty
 syn keyword ottHomName  contained coq nextgroup=ottCoqHom skipwhite skipempty
 syn keyword ottHomName  contained isa nextgroup=ottIsaHom skipwhite skipempty
 syn keyword ottHomName  contained hol nextgroup=ottHolHom skipwhite skipempty
 syn keyword ottHomName  contained ocaml nextgroup=ottOcamlHom skipwhite skipempty
-syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof com skipwhite skipempty
+syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof skipwhite skipempty
+syn match   ottComHom   contained ".*" contains=@tex
 syn match   ottTexHom   contained ".*" contains=@texMathMatchGroup,@texClusterMath
 syn match   ottCoqHom   contained ".*" contains=ottHomInner,@coq
 syn match   ottIsaHom   contained ".*" contains=ottHomInner,@isa

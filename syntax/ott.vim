@@ -16,8 +16,7 @@ silent! syn include @coq syntax/coq.vim | silent! unlet b:current_syntax
 syn cluster coqTerm           add=ottHomInner
 syn clear   coqError
 
-silent! syn include @isa syntax/isa.vim | silent! unlet b:current_syntax
-silent! syn include @hol syntax/hol.vim | silent! unlet b:current_syntax
+silent! syn include @isa syntax/isabelle.vim | silent! unlet b:current_syntax
 silent! syn include @ocaml syntax/ocaml.vim | silent! unlet b:current_syntax
 
 let &l:iskeyword = s:save_iskeyword
@@ -41,14 +40,13 @@ syn keyword ottHomName  contained com nextgroup=ottComHom skipwhite skipempty
 syn keyword ottHomName  contained tex tex-preamble tex-wrap-pre tex-wrap-post nextgroup=ottTexHom skipwhite skipempty
 syn keyword ottHomName  contained coq nextgroup=ottCoqHom skipwhite skipempty
 syn keyword ottHomName  contained isa nextgroup=ottIsaHom skipwhite skipempty
-syn keyword ottHomName  contained hol nextgroup=ottHolHom skipwhite skipempty
+syn keyword ottHomName  contained hol
 syn keyword ottHomName  contained ocaml nextgroup=ottOcamlHom skipwhite skipempty
 syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof
 syn match   ottComHom   contained "\_.*" contains=@tex
 syn match   ottTexHom   contained "\_.*" contains=@texMathMatchGroup,@texClusterMath
 syn match   ottCoqHom   contained "\_.*" contains=@coq,@coqTerm
 syn match   ottIsaHom   contained "\_.*" contains=ottHomInner,@isa
-syn match   ottHolHom   contained "\_.*" contains=ottHomInner,@hol
 syn match   ottOcamlHom contained "\_.*" contains=ottHomInner,@ocaml
 syn region  ottHomInner contained matchgroup=ottHomInnerDelim start="\[\[" end="\]\]" extend contains=ottComp,ottDots
 

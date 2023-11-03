@@ -74,7 +74,7 @@ hi def link ottPunctuation         Structure
 hi def link ottDots                ottPunctuation
 hi def link ottCompDelim           ottPunctuation
 hi def link ottBindspecDelim       ottPunctuation
-hi def link ottBindspecPunctuation ottPuncuation
+hi def link ottBindspecPunctuation ottPunctuation
 
 hi def link ottComment     Comment
 hi def link ottCommentLine ottComment

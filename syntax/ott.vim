@@ -8,16 +8,29 @@ endif
 
 let s:save_iskeyword = &l:iskeyword
 
-silent! syn include @tex syntax/tex.vim | silent! unlet b:current_syntax
-syn cluster texMathMatchGroup add=ottHomInner
-syn cluster texClusterMath    add=ottHomInner
+if !empty(globpath(&rtp, 'syntax/tex.vim'))
+  syn include @tex syntax/tex.vim
+  unlet b:current_syntax
+  syn cluster texMathMatchGroup add=ottHomInner
+  syn cluster texClusterMath    add=ottHomInner
+endif
 
-silent! syn include @coq syntax/coq.vim | silent! unlet b:current_syntax
-syn cluster coqTerm           add=ottHomInner
-syn clear   coqError
+if !empty(globpath(&rtp, 'syntax/coq.vim'))
+  syn include @coq syntax/coq.vim
+  unlet b:current_syntax
+  syn cluster coqTerm           add=ottHomInner
+  syn clear   coqError
+endif
 
-silent! syn include @isa syntax/isabelle.vim | silent! unlet b:current_syntax
-silent! syn include @ocaml syntax/ocaml.vim | silent! unlet b:current_syntax
+if !empty(globpath(&rtp, 'syntax/isabelle.vim'))
+  syn include @isa syntax/isabelle.vim
+  unlet b:current_syntax
+endif
+
+if !empty(globpath(&rtp, 'syntax/ocaml.vim'))
+  syn include @ocaml syntax/ocaml.vim
+  unlet b:current_syntax
+endif
 
 let &l:iskeyword = s:save_iskeyword
 unlet s:save_iskeyword

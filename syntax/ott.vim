@@ -47,8 +47,7 @@ syn region  ottComment start=">>" end="<<" contains=ottComment
 
 syn region  ottElements contained start="" end="\ze::" contains=ottDots,ottComp
 
-syn region  ottHom      matchgroup=ottHomDelim start="{{" end="}}" keepend contains=ottHomName,ottHomInner
-syn region  ottHom      matchgroup=ottHomDelim start="{{\*" end="\*}}" keepend contains=ottHomName,ottHomInner
+syn region  ottHom      matchgroup=ottHomDelim start="{{\z(\*\?\)" end="\z1}}" keepend contains=ottHomName,ottHomInner
 syn keyword ottHomName  contained com nextgroup=ottComHom skipwhite skipempty
 syn keyword ottHomName  contained tex tex-preamble tex-wrap-pre tex-wrap-post nextgroup=ottTexHom skipwhite skipempty
 syn keyword ottHomName  contained coq nextgroup=ottCoqHom skipwhite skipempty

@@ -47,19 +47,18 @@ syn region  ottComment start=">>" end="<<" contains=ottComment
 
 syn region  ottElements contained start="" end="\ze::" contains=ottDots,ottComp
 
-syn region  ottHom      matchgroup=ottHomDelim start="{{\z(\*\?\)" end="\z1}}" keepend contains=ottHomName,ottHomInner
-syn keyword ottHomName  contained com nextgroup=ottComHom skipwhite skipempty
-syn keyword ottHomName  contained tex tex-preamble tex-wrap-pre tex-wrap-post nextgroup=ottTexHom skipwhite skipempty
-syn keyword ottHomName  contained coq nextgroup=ottCoqHom skipwhite skipempty
-syn keyword ottHomName  contained isa nextgroup=ottIsaHom skipwhite skipempty
-syn keyword ottHomName  contained hol
-syn keyword ottHomName  contained ocaml nextgroup=ottOcamlHom skipwhite skipempty
-syn keyword ottHomName  contained coq-equality lex repr-locally-nameless phantom texvar isavar holvar ocamlvar aux lem ihtexlong order isasyn isaprec lemwcf coq-universe coq-lib isa-auxfn-proof isa-subrule-proof isa-proof
-syn match   ottComHom   contained "\_.*" contains=@tex
-syn match   ottTexHom   contained "\_.*" contains=@texMathMatchGroup,@texClusterMath
-syn match   ottCoqHom   contained "\_.*" contains=@coq,@coqTerm
-syn match   ottIsaHom   contained "\_.*" contains=ottHomInner,@isa
-syn match   ottOcamlHom contained "\_.*" contains=ottHomInner,@ocaml
+function s:define_hom(name, hom_name, contains)
+  execute 'syn region ' . a:name . ' matchgroup=ottHomDelim start="{{\(\z(\*\?\)\)\_s*' . a:hom_name . '\ze\_[^A-Za-z-]" end="\z1}}" keepend contains=' . a:contains
+endfunction
+
+call s:define_hom('ottGeneralHom', '[A-Za-z-]*', '@ottHomInner')
+call s:define_hom('ottComHom', 'com', '@tex')
+call s:define_hom('ottTexHom', 'tex', '@tex,@texMathMatchGroup,@texClusterMath')
+call s:define_hom('ottTexHom', '\%(tex-preamble\|tex-wrap-pre\|tex-wrap-post\)', '@tex')
+call s:define_hom('ottCoqHom', 'coq', '@coq,@coqTerm')
+call s:define_hom('ottIsaHom', 'isa', '@isa')
+call s:define_hom('ottOcamlHom', 'ocaml', '@ocaml')
+
 syn region  ottHomInner contained matchgroup=ottHomInnerDelim start="\[\[" end="\]\]" extend contains=ottComp,ottDots
 
 syn region  ottBindspec            matchgroup=ottBindspecDelim start="(+" end="+)" contains=ottComment,ottDots,ottComp,ottBindspecKeyword,ottBindspecPunctuation

@@ -48,7 +48,7 @@ syn region  ottComment start=">>" end="<<" contains=ottComment
 syn region  ottElements contained start="" end="\ze::" contains=ottDots,ottComp
 
 function s:define_hom(name, hom_name, contains)
-  execute 'syn region ' . a:name . ' matchgroup=ottHomDelim start="{{\(\z(\*\?\)\)\_s*' . a:hom_name . '\ze\_[^A-Za-z-]" end="\z1}}" keepend contains=' . a:contains
+  execute 'syn region ' . a:name . ' matchgroup=ottHomDelim start="{{\z(\*\?\)\_s*' . a:hom_name . '\ze\_[^A-Za-z-]" end="\z1}}" keepend contains=' . a:contains
 endfunction
 
 call s:define_hom('ottGeneralHom', '[A-Za-z-]*', '@ottHomInner')

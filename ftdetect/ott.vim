@@ -21,10 +21,6 @@ endfunction
 nnoremap <leader>dc :call RunOttOnCurrentFile()<CR>
 
 
-" Set default executables for LaTeX builder and PDF viewer
-let g:ott_tex_builder = vim.g.ott_tex_builder or 'pdflatex'
-let g:ott_pdf_viewer = vim.g.ott_pdf_viewer or 'open'
-
 " Define a function to generate, build, and preview the .tex file
 function! PreviewOttTex()
     let l:current_file = expand('%:p')
